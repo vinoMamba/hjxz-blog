@@ -6,6 +6,7 @@ specifiers:
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
   '@unocss/webpack': ^0.49.6
+  dingtalk-jsapi: ^3.0.12
   eslint: 8.34.0
   eslint-config-next: 13.1.6
   next: 13.1.6
@@ -19,6 +20,7 @@ dependencies:
   '@types/node': 18.13.0
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
+  dingtalk-jsapi: 3.0.12
   eslint: 8.34.0
   eslint-config-next: 13.1.6_7kw3g6rralp5ps6mg3uyzz6azm
   next: 13.1.6_biqbaboplfbrettd7655fr4n2y
@@ -915,6 +917,12 @@ packages:
   /destr/1.2.2:
     resolution: {integrity: sha512-lrbCJwD9saUQrqUfXvl6qoM+QN3W7tLV5pAOs+OqOmopCCz/JkE05MHedJR1xfk4IAnZuJXPVuN5+7jNA2ZCiA==}
     dev: true
+
+  /dingtalk-jsapi/3.0.12:
+    resolution: {integrity: sha512-vSP5fGuSthytrIYsN9ITa4DIO5h0bhIIKmcIYIRdvHN0brhzn1IX3hkFtNNNnjg6+u+pHWT8bKH/PRheWIhOLQ==}
+    dependencies:
+      promise-polyfill: 7.1.2
+    dev: false
 
   /dir-glob/3.0.1:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==}
@@ -2218,6 +2226,10 @@ packages:
   /prelude-ls/1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
+    dev: false
+
+  /promise-polyfill/7.1.2:
+    resolution: {integrity: sha512-FuEc12/eKqqoRYIGBrUptCBRhobL19PS2U31vMNTfyck1FxPyMfgsXyW4Mav85y/ZN1hop3hOwRlUDok23oYfQ==}
     dev: false
 
   /prop-types/15.8.1:
