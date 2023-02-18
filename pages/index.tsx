@@ -1,9 +1,22 @@
 import Head from 'next/head'
 import { ready, runtime } from 'dingtalk-jsapi'
 import { useRouter } from 'next/router'
-import { GetServerSideProps } from 'next'
 import { useEffectOnce } from '@/hooks/useEffectOnce'
+import useSwr from 'swr'
+import { useState } from 'react'
+
+function UserInfo(props: { code: string }) {
+  const  fetcher= () => fetch('/api/login', { method: 'POST', body: JSON.stringify({ code: props.code }) }).then(res => res.json())
+  const { data, error } = useSwr('/api/login',fetcher)
+  if (error) {
+    return <div>{error.message}</div>
+  } else {
+    return <div>{data?.data?.name}</div>
+  }
+}
+
 export default function Home() {
+  const [code, setCode] = useState<string>('')
   const router = useRouter()
   function getCorpIdFromUrl() {
     const asPath = router.asPath
@@ -14,13 +27,13 @@ export default function Home() {
       }
     }
   }
-  useEffectOnce(() => {
+  useEffectOnce(async () => {
     const corpId = getCorpIdFromUrl()
     if (corpId) {
       ready(async function () {
         try {
           const { code } = await runtime.permission.requestAuthCode({ corpId })
-          window.sessionStorage.setItem('code', code)
+          setCode(code)
         } catch (error) {
           console.error(error)
         }
@@ -34,16 +47,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="py-20 px-12 text-center flex flex-col items-center gap-20px text-red-400">
-        <h1>UnoCss</h1>
+      <main>
+        {code && <UserInfo code={code} />}
       </main>
     </>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  return {
-    props: {
-    }
-  }
 }
