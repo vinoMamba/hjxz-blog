@@ -1,8 +1,9 @@
 import { useEffectOnce } from "@/hooks/useEffectOnce"
 import { ready, runtime } from 'dingtalk-jsapi'
 import { useRouter } from "next/router"
-import useSwr from 'swr'
 import { FC, useState } from "react"
+import { useUser } from "@/hooks/useUser"
+import { SWRConfig } from "swr"
 
 type Props = {
   children: React.ReactNode
@@ -33,14 +34,7 @@ export const Layout: FC<Props> = ({ children }) => {
       })
     }
   })
-  const fetcher = async () => {
-    const res = await fetch('/api/login', { method: 'POST', body: JSON.stringify({ code }) })
-    if (!res.ok) {
-      throw new Error('登录失败')
-    }
-    return res.json()
-  }
-  const { data, error } = useSwr(code ? '/api/login' : null, fetcher, { revalidateOnFocus: false })
+  const { data, error } = useUser(code)
   if (error) {
     return <div>{error.message}</div>
   }
@@ -48,9 +42,12 @@ export const Layout: FC<Props> = ({ children }) => {
     return <div>loading.....</div>
   }
   return (
-    <>
-      {data?.data?.name}
+    <SWRConfig value={{
+      fallbackData: {
+        userInfo: data
+      }
+    }}>
       {children}
-    </>
+    </SWRConfig>
   )
 }

@@ -1,17 +1,11 @@
 import Head from 'next/head'
-import useSwr from 'swr'
+import { useSWRConfig } from 'swr'
+import { UserInfo } from './types'
 
-function UserInfo(props: { code: string }) {
-  const  fetcher= () => fetch('/api/login', { method: 'POST', body: JSON.stringify({ code: props.code }) }).then(res => res.json())
-  const { data, error } = useSwr('/api/login',fetcher)
-  if (error) {
-    return <div>{error.message}</div>
-  } else {
-    return <div>{data?.data?.name}</div>
-  }
-}
 
 export default function Home() {
+  const { fallbackData } = useSWRConfig()
+  const userInfo = fallbackData?.userInfo as UserInfo
   return (
     <>
       <Head>
@@ -20,6 +14,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        {userInfo.name}
       </main>
     </>
   )
