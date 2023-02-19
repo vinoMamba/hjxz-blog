@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@unocss/webpack": "^0.49.6",
+    "prisma": "^4.10.1",
     "unocss": "^0.49.6"
   }
 }

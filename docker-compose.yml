@@ -11,9 +11,3 @@ services:
     environment:
       - POSTGRES_USER=blog
       - POSTGRES_PASSWORD=123456
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
