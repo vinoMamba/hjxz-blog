@@ -1,5 +1,5 @@
-import { Result, UserInfo } from '@/next-env'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { Result, UserInfo } from '../types'
 
 export default async function handler(
   req: NextApiRequest,
