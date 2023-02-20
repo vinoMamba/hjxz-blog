@@ -1,10 +1,16 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-size: 16px;
 }
+
 *::before,
-*::after{
+*::after {
   box-sizing: border-box;
 }
 
+
+:root {
+  font-size: 4px;
+}
