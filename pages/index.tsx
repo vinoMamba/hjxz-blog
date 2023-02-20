@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Nav from '@/components/Nav'
 import { useSWRConfig } from 'swr'
 import { UserInfo } from './types'
 
@@ -14,6 +15,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <Nav />
         {userInfo.name}
       </main>
     </>
