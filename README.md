@@ -29,8 +29,8 @@ npx prisma db seed --preview-feature
 | 字段名 | 类型 | 说明 |
 | --- | --- | --- |
 | id | int | 用户id |
-| name| varchar | 用户名 |
-| userId| varchar | 钉钉Id|
+| name| text| 用户名 |
+| userId| text| 钉钉Id|
 |createAt|timestamp|创建时间|
 |updateAt|timestamp|更新时间|
 
@@ -41,10 +41,11 @@ npx prisma db seed --preview-feature
 | id | int | 博客id |
 | title| varchar | 博客标题 |
 | content| text | 博客内容|
+|authorId| text |用户id|
+|published|boolean|是否发布|
+|categoryId|int|分类id|
 |createAt|timestamp|创建时间|
 |updateAt|timestamp|更新时间|
-|userId|int|用户id|
-|categoryId|int|分类id|
 
 ### 分类表
 
@@ -52,7 +53,7 @@ npx prisma db seed --preview-feature
 | --- | --- | --- |
 | id | int | 分类id |
 | name| varchar | 分类名称 |
+|createById|int|用户id|
 |createAt|timestamp|创建时间|
 |updateAt|timestamp|更新时间|
-|userId|int|用户id|
 

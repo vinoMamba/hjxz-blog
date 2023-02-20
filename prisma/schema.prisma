@@ -10,10 +10,37 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
-  id        Int      @id @default(autoincrement())
-  userId   String   @unique
+// 用户信息
+model User {
+  id        Int        @id @default(autoincrement())
+  userId    String     @unique
   name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  Post      Post[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Category  Category[]
+}
+
+// 博客信息
+model Post {
+  id        Int        @id @default(autoincrement())
+  title     String
+  content   String
+  author    User       @relation(fields: [authorId], references: [userId])
+  authorId  String
+  published Boolean    @default(false)
+  Catrgory  Category[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+// 分类
+model Category {
+  id         Int      @id @default(autoincrement())
+  name       String
+  post       Post[]
+  createBy   User     @relation(fields: [createById], references: [userId])
+  createById String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
