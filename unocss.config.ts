@@ -7,4 +7,7 @@ export default defineConfig({
     presetIcons(),
     presetWebFonts(),
   ],
+  rules: [
+    [/^text-(\d+)$/, ([_, match]) => ({ fontSize: `${match}px` })]
+  ]
 })
