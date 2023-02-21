@@ -30,12 +30,12 @@ const Nav = () => {
             onClick={() => router.push('/')}
             src="/logo.svg"
             alt="logo"
-            width={36}
-            height={36}
+            width={42}
+            height={42}
           />
           <h1 className='flex flex-col justify-center ml-4 '>
-            <span className='text-12 text-gray-5'>HJ-Blog</span>
-            <span>技术博客</span>
+            <span className='text-12 text-gray-5 font-italic'>HJ-Blog</span>
+            <span className='text-black op-80'>技术博客</span>
           </h1>
         </div>
         <div className='cursor-pointer position-relative'>

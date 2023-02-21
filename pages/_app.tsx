@@ -9,8 +9,10 @@ import Nav from '@/components/Nav'
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Layout>
-      <Nav/>
-      <Component {...pageProps} />
+      <Nav />
+      <main className='w-1200 m-auto h-screen'>
+        <Component {...pageProps} />
+      </main>
     </Layout>
   )
 }
