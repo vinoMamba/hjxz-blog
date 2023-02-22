@@ -1,10 +1,8 @@
+import { Category } from '@/components/Category'
 import Menu from '@/components/Menu'
 import Head from 'next/head'
 
 export default function Home() {
-  function handleClick(id: number) {
-    console.log(id)
-  }
   return (
     <>
       <Head>
@@ -14,6 +12,7 @@ export default function Home() {
       </Head>
       <main className='flex justify-center border border-red mt-16'>
         <div className='border border-black grow h-screen'>
+          <Category />
           <ul>
           </ul>
         </div>
