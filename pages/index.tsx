@@ -1,12 +1,13 @@
 import { Category } from '@/components/Category'
 import Menu from '@/components/Menu'
+import { PostList } from '@/components/PostList'
 import Head from 'next/head'
-import { createContext, Dispatch, SetStateAction, useState } from 'react'
+import { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react'
 
-export const CategoryContext = createContext<{ category: number, setCategory: Dispatch<SetStateAction<number>> } | null>(null)
+export const CategoryContext = createContext<{ category: number | undefined, setCategory: Dispatch<SetStateAction<number | undefined>> } | null>(null)
 
 export default function Home() {
-  const [category, setCategory] = useState(-1)
+  const [category, setCategory] = useState<undefined | number>(undefined)
   return (
     <>
       <Head>
@@ -21,9 +22,7 @@ export default function Home() {
         }}>
           <div className='border border-black grow h-screen'>
             <Category />
-            <ul>
-              <li>{category}</li>
-            </ul>
+            <PostList />
           </div>
         </CategoryContext.Provider>
         <Menu />

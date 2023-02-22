@@ -2,21 +2,26 @@ import { Result } from '@/pages/types'
 import { Post } from '@prisma/client'
 import useSwr from 'swr'
 
-export const usePosts = () => {
-  const fetcher = async ({ categoryId, tagId }: { categoryId?: number, tagId?: number }) => {
-    const res = await fetch('/api/posts', { method: 'GET', body: JSON.stringify({ categoryId, tagId }) })
+export function usePosts({ categoryId }: { categoryId?: number }) {
+  const fetcher = async (categoryId?: number) => {
+    console.log('fetcher')
+    console.log(categoryId)
+    const res = await fetch('/api/posts', { method: 'GET' })
     if (!res.ok) {
       throw new Error('获取博客失败')
     }
     return res.json()
   }
-  const { data, error } = useSwr<Result<Post[]>>('/api/categories', fetcher, { revalidateOnFocus: false })
-  function updatePosts({ categoryId, tagId }: { categoryId?: number, tagId?: number }) {
-    fetcher({ categoryId, tagId })
-  }
+  const {
+    data,
+    error,
+    mutate
+  } = useSwr<Result<Post[]>>(
+    ['/api/posts', categoryId],
+    ([_, categoryId]: [string, number]) => fetcher(categoryId), { revalidateOnFocus: false })
   return {
     posts: data?.data,
     error,
-    updatePosts
+    updatePosts: mutate
   }
 }

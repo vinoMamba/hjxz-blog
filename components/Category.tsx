@@ -1,12 +1,12 @@
 import { useCategory } from '@/hooks/useCategory'
 import { CategoryContext } from '@/pages'
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 
 
 type CategoryItemProps = {
   children: React.ReactNode
-  current: number
-  index: number
+  current: number | undefined
+  index: number | undefined
   onClick: () => void
 }
 
@@ -34,7 +34,7 @@ export const Category = () => {
   }
   return (
     <div className='flex gap-8 justify-start items-center border-b p-4'>
-      <CategoryItem current={category} index={-1} onClick={() => setCategory(-1)} >全部</CategoryItem>
+      <CategoryItem current={category} index={undefined} onClick={() => setCategory(undefined)} >全部</CategoryItem>
       {categories.map((c) => {
         return (
           <CategoryItem
