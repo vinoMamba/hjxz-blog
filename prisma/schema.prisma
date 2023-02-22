@@ -12,35 +12,48 @@ datasource db {
 
 // 用户信息
 model User {
-  id        Int        @id @default(autoincrement())
-  userId    String     @unique
+  id        Int      @id @default(autoincrement())
+  userId    String   @unique
   name      String?
-  Post      Post[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  Category  Category[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 // 博客信息
 model Post {
-  id        Int        @id @default(autoincrement())
-  title     String
-  content   String
-  author    User       @relation(fields: [authorId], references: [userId])
-  authorId  String
-  published Boolean    @default(false)
-  Catrgory  Category[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-}
-
-// 分类
-model Category {
   id         Int      @id @default(autoincrement())
-  name       String
-  post       Post[]
-  createBy   User     @relation(fields: [createById], references: [userId])
-  createById String
+  title      String
+  content    String
+  authorId   String
+  categoryId Int
+  tags       Int[]
+  published  Boolean  @default(false)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+}
+
+// 标签
+model Tag {
+  id         Int      @id @default(autoincrement())
+  name       String
+  createById String //userId
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+// 文章标签关联表
+model PostTag {
+  id        Int      @id @default(autoincrement())
+  postId    Int[]
+  tagId     Int[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+//分类
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

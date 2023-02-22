@@ -38,3 +38,5 @@ next-env.d.ts
 
 # the database
 postgres
+
+prisma/**/*.js

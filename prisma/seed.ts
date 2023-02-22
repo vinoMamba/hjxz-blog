@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, Prisma } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
@@ -11,27 +11,26 @@ function randomNum(n: number) {
   return t
 }
 
+//初始化分类表
+async function initCategory() {
+  const categoryList: Prisma.CategoryCreateInput[] = [
+    { name: '前端' },
+    { name: '后端' },
+    { name: '运维' }
+  ]
+  const firstCategory = await prisma.category.findFirst()
+  if (firstCategory) return
+  await Promise.all(categoryList.map(async (item) => {
+    await prisma.category.create({
+      data: item
+    })
+  }))
+}
+
 
 
 async function main() {
-  const user = await prisma.user.create({
-    data: {
-      userId: randomNum(4),
-      name: `test${randomNum(2)}`,
-    }
-  })
-  if (user) {
-    const post = await prisma.post.create({
-      data: {
-        title: 'first post' + randomNum(2),
-        content: 'first post content' + randomNum(2),
-        authorId: user.userId,
-        published: true,
-      }
-    })
-    console.log(user)
-    console.log(post)
-  }
+  await initCategory()
 }
 main()
   .catch(e => {
