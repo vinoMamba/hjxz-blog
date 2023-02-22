@@ -10,50 +10,79 @@ pnpm dev
 ## docker commands
 
 ```bash
+# 后台启动
 docker-compose up -d
+# 停止
 docker-compose down
+```
+
+## Postgres
+
+```bash
+docker-compose exec db psql -U blog
+# 查看时区
+show timezone;
+# 设置时区
+set timezone to 'Asia/Shanghai';
 ```
 
 ## Prisma
 
 ```bash
+npx prism init
 npx prisma migrate dev --name init
-npx prisma db seed --preview-feature
+npx prisma generate
 ```
 
+## Database
 
-## 数据库设计
+```prisma
+// 用户信息
+model User {
+  id        Int      @id @default(autoincrement())
+  userId    String   @unique
+  name      String?
+  createdAt DateTime @default(now()) @db.Timestamptz // timestamp with time zone !!! important
+  updatedAt DateTime @updatedAt @db.Timestamptz
+}
 
-### 用户表
+// 博客信息
+model Post {
+  id         Int      @id @default(autoincrement())
+  title      String
+  content    String
+  authorId   String
+  categoryId Int
+  tags       Int[]
+  published  Boolean  @default(false)
+  createdAt DateTime @default(now()) @db.Timestamptz
+  updatedAt DateTime @updatedAt @db.Timestamptz
+}
 
-| 字段名 | 类型 | 说明 |
-| --- | --- | --- |
-| id | int | 用户id |
-| name| text| 用户名 |
-| userId| text| 钉钉Id|
-|createAt|timestamp|创建时间|
-|updateAt|timestamp|更新时间|
+// 标签
+model Tag {
+  id         Int      @id @default(autoincrement())
+  name       String
+  createById String //userId
+  createdAt DateTime @default(now()) @db.Timestamptz
+  updatedAt DateTime @updatedAt @db.Timestamptz
+}
 
-### 博客表
+// 文章标签关联表
+model PostTag {
+  id        Int      @id @default(autoincrement())
+  postId    Int[]
+  tagId     Int[]
+  createdAt DateTime @default(now()) @db.Timestamptz
+  updatedAt DateTime @updatedAt @db.Timestamptz
+}
 
-| 字段名 | 类型 | 说明 |
-| --- | --- | --- |
-| id | int | 博客id |
-| title| varchar | 博客标题 |
-| content| text | 博客内容|
-|authorId| text |用户id|
-|published|boolean|是否发布|
-|categoryId|int|分类id|
-|createAt|timestamp|创建时间|
-|updateAt|timestamp|更新时间|
-
-### 分类表
-
-| 字段名 | 类型 | 说明 |
-| --- | --- | --- |
-| id | int | 分类id |
-| name| varchar | 分类名称 |
-|createById|int|用户id|
-|createAt|timestamp|创建时间|
-|updateAt|timestamp|更新时间|
+//分类
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now()) @db.Timestamptz
+  updatedAt DateTime @updatedAt @db.Timestamptz
+}
+```
 

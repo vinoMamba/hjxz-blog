@@ -15,8 +15,8 @@ model User {
   id        Int      @id @default(autoincrement())
   userId    String   @unique
   name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @db.Timestamptz // timestamp with time zone !!! important
+  updatedAt DateTime @updatedAt @db.Timestamptz
 }
 
 // 博客信息
@@ -28,8 +28,8 @@ model Post {
   categoryId Int
   tags       Int[]
   published  Boolean  @default(false)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt DateTime @default(now()) @db.Timestamptz
+  updatedAt DateTime @updatedAt @db.Timestamptz
 }
 
 // 标签
@@ -37,8 +37,8 @@ model Tag {
   id         Int      @id @default(autoincrement())
   name       String
   createById String //userId
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt DateTime @default(now()) @db.Timestamptz
+  updatedAt DateTime @updatedAt @db.Timestamptz
 }
 
 // 文章标签关联表
@@ -46,14 +46,14 @@ model PostTag {
   id        Int      @id @default(autoincrement())
   postId    Int[]
   tagId     Int[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @db.Timestamptz
+  updatedAt DateTime @updatedAt @db.Timestamptz
 }
 
 //分类
 model Category {
   id        Int      @id @default(autoincrement())
   name      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @db.Timestamptz
+  updatedAt DateTime @updatedAt @db.Timestamptz
 }
