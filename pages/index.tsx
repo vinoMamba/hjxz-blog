@@ -1,14 +1,10 @@
 import Menu from '@/components/Menu'
-import { Post } from '@prisma/client'
-import { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import prisma from '@/lib/prisma'
-import { makeSerializable } from '@/shared/utils'
 
-type Props = {
-  articles: Post[]
-}
-export default function Home(props: Props) {
+export default function Home() {
+  function handleClick(id: number) {
+    console.log(id)
+  }
   return (
     <>
       <Head>
@@ -19,21 +15,10 @@ export default function Home(props: Props) {
       <main className='flex justify-center border border-red mt-16'>
         <div className='border border-black grow h-screen'>
           <ul>
-            {props.articles.map((article) => (
-              <li key={article.id}>{article.title}</li>
-            ))} </ul>
+          </ul>
         </div>
         <Menu />
       </main>
     </>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const articles = await prisma.post.findMany()
-  return {
-    props: {
-      articles: makeSerializable(articles)
-    }
-  }
 }
