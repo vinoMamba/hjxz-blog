@@ -1,5 +1,6 @@
 import { useCategory } from '@/hooks/useCategory'
-import { useState } from 'react'
+import { CategoryContext } from '@/pages'
+import { useState, useContext } from 'react'
 
 
 type CategoryItemProps = {
@@ -23,7 +24,7 @@ const CategoryItem = ({ children, current, index, onClick }: CategoryItemProps) 
 }
 
 export const Category = () => {
-  const [current, setCurrent] = useState(-1)
+  const { category, setCategory } = useContext(CategoryContext)!
   const { categories, error } = useCategory()
   if (error) {
     return <div>{error.message}</div>
@@ -33,14 +34,14 @@ export const Category = () => {
   }
   return (
     <div className='flex gap-8 justify-start items-center border-b p-4'>
-      <CategoryItem current={current} index={-1} onClick={() => setCurrent(-1)} >全部</CategoryItem>
+      <CategoryItem current={category} index={-1} onClick={() => setCategory(-1)} >全部</CategoryItem>
       {categories.map((c) => {
         return (
           <CategoryItem
             key={c.id}
-            current={current}
+            current={category}
             index={c.id}
-            onClick={() => setCurrent(c.id)} >{c.name}</CategoryItem>
+            onClick={() => setCategory(c.id)} >{c.name}</CategoryItem>
         )
       })}
     </div>
