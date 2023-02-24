@@ -11,6 +11,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Result<Post[] | null>>
 ) {
+
+  req.headers['Content-Type'] = 'application/json'
   if (req.method !== 'GET') return res.status(405).json({ errcode: 405, data: null, message: 'method not allowed' })
   const { categoryId } = req.query
   const allPosts = await prisma.post.findMany({

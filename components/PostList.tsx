@@ -7,12 +7,11 @@ export const PostList = () => {
   const { posts } = usePosts({ categoryId: category })
   return (
     <div>
-      {category || '全部'}
-      {posts && posts.map((p) => {
+      {posts && posts.length > 0 ? posts.map((p) => {
         return (
           < div key={p.id}> {p.title}</div>
         )
-      })}
+      }) : <div>暂无数据</div>}
     </div>
   )
 }
