@@ -1,7 +1,12 @@
+import dynamic from 'next/dynamic'
 
+const DynamicEditor = dynamic(
+  () => import('@/components/Editor'),
+  { ssr: false, suspense: true, }
+)
 const Article = () => {
   return (
-    <div>写文章</div>
+    <DynamicEditor />
   )
 }
 export default Article
