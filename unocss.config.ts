@@ -9,5 +9,6 @@ export default defineConfig({
   ],
   rules: [
     [/^text-(\d+)$/, ([_, match]) => ({ fontSize: `${match}px` })]
-  ]
+  ],
+  shortcuts: {}
 })
