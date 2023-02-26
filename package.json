@@ -12,6 +12,8 @@
     "m": "prisma migrate"
   },
   "dependencies": {
+    "@mdx-js/mdx": "^2.3.0",
+    "@mdx-js/react": "^2.3.0",
     "@next/font": "13.1.6",
     "@prisma/client": "^4.10.1",
     "@react-spring/web": "^9.6.1",
