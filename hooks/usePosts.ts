@@ -3,11 +3,13 @@ import { Post } from '@prisma/client'
 import useSwr from 'swr'
 
 export function usePosts({ categoryId }: { categoryId?: number }) {
+  const token = localStorage.getItem('token')
   const fetcher = async (url: string) => {
     const res = await fetch(url, {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       },
     }
     )

@@ -1,4 +1,4 @@
-import { Result, UserInfo } from '@/pages/types'
+import { LoginInfo, Result } from '@/pages/types'
 import useSwr from 'swr'
 
 export function useUser(code: string) {
@@ -9,7 +9,7 @@ export function useUser(code: string) {
     }
     return res.json()
   }
-  const { data, error } = useSwr<Result<UserInfo>>(code ? '/api/login' : null, fetcher, { revalidateOnFocus: false })
+  const { data, error } = useSwr<Result<LoginInfo>>(code ? '/api/login' : null, fetcher, { revalidateOnFocus: false })
   return {
     data: data?.data,
     error,

@@ -3,8 +3,14 @@ import { Category } from '@prisma/client'
 import useSwr from 'swr'
 
 export function useCategory() {
+  const token = localStorage.getItem('token')
   const fetcher = async () => {
-    const res = await fetch('/api/categories', { method: 'GET' })
+    const res = await fetch('/api/categories', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
     if (!res.ok) {
       throw new Error('获取分类失败')
     }
