@@ -12,3 +12,9 @@ services:
       - POSTGRES_DB=blog
     ports:
       - "5432:5432"
+  blog:
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
