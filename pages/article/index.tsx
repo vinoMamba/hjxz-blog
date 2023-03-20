@@ -1,15 +1,10 @@
 import { readFileSync } from 'fs'
 import { GetStaticProps } from 'next'
-import dynamic from 'next/dynamic'
 import { join } from 'path'
 
 type Props = {
   theme: string
 }
-const DynamicEditor = dynamic<Props>(
-  () => import('@/components/Editor'),
-  { ssr: false, suspense: true, }
-)
 const Article = (props: Props) => {
   return (
     <main>
@@ -20,7 +15,6 @@ const Article = (props: Props) => {
           <button className='h-32 flex items-center justify-center px-16 py-2 bg-#1d7dfa text-white'>发布</button>
         </div>
       </header>
-      <DynamicEditor theme={props.theme} />
     </main>
   )
 }
