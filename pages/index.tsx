@@ -1,8 +1,14 @@
+import Menu from "@/components/Menu";
+
 export default function Home() {
   return (
     <>
-      <main className="h-screen bg-#f2f3f5">
-        首页
+      <main
+        style={{
+          maxWidth: '1200px'
+        }}
+        className="h-screen m-auto pt-72">
+        <Menu />
       </main>
     </>
   )

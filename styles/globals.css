@@ -20,6 +20,10 @@ h6 {
   font-weight: normal;
 }
 
+body {
+  background-color: #f2f3f5;
+}
+
 ul,
 ol {
   list-style: none;

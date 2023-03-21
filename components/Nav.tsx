@@ -12,7 +12,7 @@ const Nav = () => {
       style={{
         backdropFilter: 'blur(20px)',
         letterSpacing: '1px',
-        backgroundColor: 'rgba(255, 255, 255, 0.5)',
+        backgroundColor: 'transparent',
         boxShadow: '0 2px 4px rgb(0 0 0 / 12%)'
       }}
       className="h[64px] w-full position-fixed left-0 top-0 z-11 px-24 text-16 font-400">
