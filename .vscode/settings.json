@@ -1,3 +1,7 @@
 {
-  "unocss.root": "."
+  "unocss.root": ".",
+  "cSpell.words": [
+    "gemoji",
+    "juejin"
+  ]
 }

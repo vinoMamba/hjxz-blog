@@ -42,3 +42,8 @@ a {
   width: 4px;
   background-color: #f5f5f5;
 }
+
+/* 为了设置编辑器的高度 */
+.bytemd {
+  height: calc(100vh - 82px) !important;
+}
