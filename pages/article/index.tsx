@@ -1,37 +1,17 @@
-import { readFileSync } from 'fs'
-import { GetStaticProps } from 'next'
-import dynamic from 'next/dynamic'
-import { join } from 'path'
-
-type Props = {
-  theme: string
-}
-const DynamicEditor = dynamic<Props>(
-  () => import('@/components/Editor'),
-  { ssr: false, suspense: true, }
-)
-const Article = (props: Props) => {
+import { ByteEditor } from "@/components/ByteEditor"
+import { Input, Button } from "antd"
+const Article = () => {
   return (
     <main>
-      <header className='flex h-64 justify-between items-center border-b'>
-        <input type="text" className='mr-auto h-full w-full outline-none pl-32' placeholder='输入文章标题...' />
-        <div className='flex items-center justify-start w-320'>
-          <button className='h-32 flex items-center justify-center px-16 py-2 border border-#1d7dfa text-#1d7dfa mr-16'>草稿</button>
-          <button className='h-32 flex items-center justify-center px-16 py-2 bg-#1d7dfa text-white'>发布</button>
+      <header className='p-16 px-32 bg-white flex items-center border'>
+        <Input bordered={false} placeholder='请输入文章标题' size="large" className="flex-1 text-24 font-500" />
+        <div>
+          <Button type='primary'>保存</Button>
+          <Button type="dashed" className="ml-16">发布</Button>
         </div>
       </header>
-      <DynamicEditor theme={props.theme} />
+      <ByteEditor />
     </main>
   )
 }
 export default Article
-
-
-export const getStaticProps: GetStaticProps = async () => {
-  const theme = readFileSync(join(process.cwd(), 'styles', 'theme-1.css'), 'utf-8')
-  return {
-    props: {
-      theme
-    }
-  }
-}

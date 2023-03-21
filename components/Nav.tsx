@@ -1,56 +1,53 @@
-import Image from 'next/image'
-import { animated, useSpring } from '@react-spring/web'
-import { useState } from 'react'
-import { useRouter } from 'next/router'
+import Image from "next/image"
+import { useRouter } from "next/router"
+import { Avatar, Dropdown, MenuProps, Button } from 'antd'
 
 const Nav = () => {
   const router = useRouter()
-  const [hover, setHover] = useState(false)
-  const spring = useSpring({
-    from: {
-      width: 0,
-      height: 0,
-      opacity: 0,
+  const items: MenuProps["items"] = [
+    {
+      key: '0', label: (
+        <span className='flex items-center' onClick={() => router.push('/user')}>
+          个人中心
+        </span>
+      )
     },
-    to: {
-      width: hover ? 100 : 0,
-      height: hover ? 100 : 0,
-      opacity: 1,
-    },
-  })
-  const handleClick = () => {
-    router.push('/user')
-    setHover(false)
-  }
+  ]
   return (
-    <nav className="flex items-center border-b position-sticky top-0 z-10 bg-white">
-      <main className='m-auto bg-transparent w-1200 flex justify-between items-center p-8'>
-        <div className='flex items-center cursor-pointer'>
+    <nav
+      style={{
+        backdropFilter: 'blur(20px)',
+        letterSpacing: '1px',
+        backgroundColor: 'transparent',
+        boxShadow: '0 2px 4px rgb(0 0 0 / 12%)'
+      }}
+      className="h[64px] w-full position-fixed left-0 top-0 z-11 px-24 text-16 font-400">
+      <div
+        style={{
+          maxWidth: '1200px'
+        }}
+        className="m-auto flex justify-between items-center p-8">
+        <div
+          onClick={() => router.push('/')}
+          className='flex items-center cursor-pointer'>
           <Image
-            onClick={() => router.push('/')}
             src="/logo.svg"
             alt="logo"
-            width={42}
-            height={42}
+            width={36}
+            height={36}
           />
           <h1 className='flex flex-col justify-center ml-4 '>
             <span className='text-12 text-gray-5 font-italic'>HJ-Blog</span>
-            <span className='text-black op-80'>技术博客</span>
+            <span className='text-black op-80 mt-4'>技术博客</span>
           </h1>
         </div>
-        <div className='flex'>
-          <div className='cursor-pointer mr-16' onClick={() => router.push('/article')}>写文章</div>
-          <div className='cursor-pointer position-relative'>
-            <span
-              onClick={() => setHover(!hover)}
-              hover="border-black bg-#f5f5f5"
-              className='border border-slate rounded-4 px-4'>王 鑫</span>
-            <animated.div className='border bg-#f5f5f5  overflow-hidden  position-absolute right-0 flex justify-center p-4' style={spring}>
-              <span onClick={handleClick}>个人中心</span>
-            </animated.div>
-          </div>
+        <div className="flex items-center">
+          <Button className="mr-32" type="dashed" onClick={() => router.push('/article')}>写文章</Button>
+          <Dropdown menu={{ items }} placement="bottomRight" >
+            <Avatar />
+          </Dropdown>
         </div>
-      </main>
+      </div>
     </nav >
   )
 }

@@ -12,6 +12,14 @@
     "m": "prisma migrate"
   },
   "dependencies": {
+    "@bytemd/plugin-breaks": "^1.20.2",
+    "@bytemd/plugin-frontmatter": "^1.20.2",
+    "@bytemd/plugin-gemoji": "^1.20.2",
+    "@bytemd/plugin-gfm": "^1.20.2",
+    "@bytemd/plugin-highlight": "^1.20.2",
+    "@bytemd/plugin-medium-zoom": "^1.20.2",
+    "@bytemd/plugin-mermaid": "^1.20.2",
+    "@bytemd/react": "^1.20.2",
     "@mdx-js/mdx": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@next/font": "13.1.6",
@@ -20,9 +28,13 @@
     "@types/node": "18.13.0",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
+    "antd": "^5.3.2",
+    "bytemd": "^1.20.2",
     "dingtalk-jsapi": "^3.0.12",
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
+    "highlight.js": "^11.7.0",
+    "juejin-markdown-themes": "^1.29.5",
     "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -33,12 +45,7 @@
     "@types/typescript": "^2.0.0",
     "@unocss/webpack": "^0.49.6",
     "jose": "^4.12.0",
-    "marked": "^4.2.12",
-    "monaco-editor": "^0.36.0",
-    "monaco-editor-webpack-plugin": "^7.0.1",
     "prisma": "^4.10.1",
-    "rehype-prism-plus": "^1.5.1",
-    "remark-gfm": "^3.0.1",
     "unocss": "^0.49.6"
   }
 }

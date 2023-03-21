@@ -8,7 +8,7 @@ export default defineConfig({
     presetWebFonts(),
   ],
   rules: [
-    [/^text-(\d+)$/, ([_, match]) => ({ fontSize: `${match}px` })]
+    [/^max-w-(\d+)$/, ([_, match]) => ({ maxWidth: `${match}px` })],
   ],
   shortcuts: {}
 })

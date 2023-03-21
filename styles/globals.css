@@ -11,6 +11,27 @@
   box-sizing: border-box;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+
+body {
+  background-color: #f2f3f5;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
 
 :root {
   font-size: 4px;
@@ -20,4 +41,9 @@
 ::-webkit-scrollbar {
   width: 4px;
   background-color: #f5f5f5;
+}
+
+/* 为了设置编辑器的高度 */
+.bytemd {
+  height: calc(100vh - 82px) !important;
 }
