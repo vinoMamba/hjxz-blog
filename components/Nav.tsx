@@ -5,7 +5,13 @@ import { Avatar, Dropdown, MenuProps, Button } from 'antd'
 const Nav = () => {
   const router = useRouter()
   const items: MenuProps["items"] = [
-    { key: '0', label: '个人中心' },
+    {
+      key: '0', label: (
+        <span className='flex items-center' onClick={() => router.push('/user')}>
+          个人中心
+        </span>
+      )
+    },
   ]
   return (
     <nav
@@ -21,9 +27,10 @@ const Nav = () => {
           maxWidth: '1200px'
         }}
         className="m-auto flex justify-between items-center p-8">
-        <div className='flex items-center cursor-pointer'>
+        <div
+          onClick={() => router.push('/')}
+          className='flex items-center cursor-pointer'>
           <Image
-            onClick={() => router.push('/')}
             src="/logo.svg"
             alt="logo"
             width={36}
