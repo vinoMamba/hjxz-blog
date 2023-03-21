@@ -8,7 +8,7 @@ export default function Home() {
         style={{
           maxWidth: '1200px'
         }}
-        className="h-screen m-auto flex items-start overflow-auto">
+        className="h-screen m-auto items-start overflow-auto lg:flex ">
         <Menu />
         <PostList className='flex-1' />
       </main>

@@ -26,7 +26,7 @@ const PostList: FC<PostListProps> = (props) => {
   })
   return (
     <div
-      className={`${props.className} h-screen overflow-auto pt-72 ml-8`}
+      className={`${props.className} h-screen overflow-auto ml-8 lg:pt-72 `}
     >
       <Card>
         <Tabs defaultActiveKey="1" items={items} onChange={tabChange} ></Tabs>
