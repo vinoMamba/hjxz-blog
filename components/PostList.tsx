@@ -12,7 +12,6 @@ const PostList: FC<PostListProps> = (props) => {
   ]
 
   function tabChange(key: string) {
-    console.log(key)
   }
 
   const postList: BlogItem[] = Array.from({ length: 20 }).map((_, index) => {

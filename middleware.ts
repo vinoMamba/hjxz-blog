@@ -5,7 +5,6 @@ import { verify } from './shared/jwt'
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
-  console.log('middleware', request.url)
   return NextResponse.next()
   // if (authorization) {
   //   const token = authorization?.split(' ')[1]
