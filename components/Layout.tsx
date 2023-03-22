@@ -25,13 +25,17 @@ export const Layout: FC<Props> = ({ children }) => {
       ready(async function () {
         try {
           const { code } = await runtime.permission.requestAuthCode({ corpId })
-          setCode(() => code)
+          const data = await fetch(`/api/login`, {
+            method: 'POST',
+            body: JSON.stringify({ code }),
+          })
         } catch (error) {
           console.error(error)
         }
       })
     }
   })
+
   return (
     <>
       {children}
