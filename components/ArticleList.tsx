@@ -1,12 +1,21 @@
 import { Article } from "@prisma/client"
+import { Result, Button } from "antd"
 import { FC } from "react"
+import { useRouter } from "next/router"
 
 interface PostProps {
   list: Article[]
 }
 export const ArticleList: FC<PostProps> = (props) => {
+  const router = useRouter()
   return (
     <ul className="select-none">
+      {props.list.length === 0 && <li className="text-center text-#515767 text-14">
+        <Result
+          title="暂无数据"
+          extra={<Button type="dashed" onClick={() => router.push('/article')}>水一篇博客</Button>}
+        />
+      </li>}
       {props.list.map(item => {
         return (
           <li

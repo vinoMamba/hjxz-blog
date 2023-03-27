@@ -6,14 +6,24 @@ import { GetStaticProps } from "next";
 import prisma from "@/lib/prisma";
 import { Category } from "@prisma/client";
 import { makeSerializable } from "@/shared/utils";
+import { createContext, useState } from "react";
+
+export const ArticleContext = createContext<{
+  current: number
+  setCurrent: (id: number) => void
+} | null>(null)
 
 type Props = {
   categories: Category[]
 }
 export default function Home(props: Props) {
-  const { articles } = useArticle({})
+  const [current, setCurrent] = useState(0)
+  const { articles } = useArticle({ categoryId: current })
   return (
-    <>
+    <ArticleContext.Provider value={{
+      current,
+      setCurrent
+    }}>
       <main
         style={{
           maxWidth: '1200px'
@@ -28,7 +38,7 @@ export default function Home(props: Props) {
           </Card>
         </div>
       </main>
-    </>
+    </ArticleContext.Provider>
   )
 }
 

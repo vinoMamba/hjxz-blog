@@ -1,24 +1,23 @@
+import { ArticleContext } from "@/pages"
 import { Category } from "@prisma/client"
 import { Card } from "antd"
-import { FC, useState } from "react"
+import { FC } from "react"
+import { useContext } from "react"
 
 type Props = {
   categories: Category[]
 }
 
 const Menu: FC<Props> = (props) => {
-  const [current, setCurrent] = useState(-1)
-  const categoryList = [{ id: -1, name: '全部' }].concat(props.categories)
-  function handleClick(id: number) {
-    setCurrent(id)
-  }
+  const { current, setCurrent } = useContext(ArticleContext)!
+  const categoryList = [{ id: 0, name: '全部' }].concat(props.categories)
   return (
     <Card className="mt-72 lg:w[300px]">
       <ol className="flex gap-8 m-0 lg:flex-col">
         {categoryList.map(item => {
           return (
             <li
-              onClick={() => handleClick(item.id)}
+              onClick={() => setCurrent(item.id)}
               key={item.id}
               color={current === item.id ? '#1e80fe' : '#000'}
               bg={current === item.id ? '#eaf2ff' : '#fff'}

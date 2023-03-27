@@ -19,7 +19,7 @@ export function useArticle({ categoryId }: { categoryId?: number }) {
     return res.json()
   }
   const { data, error } = useSwr<Result<Article[]>>(
-    () => categoryId ? `/api/articles?categoryId=${categoryId}` : '/api/articles',
+    () => categoryId !== 0 ? `/api/articles?categoryId=${categoryId}` : '/api/articles',
     (url: string) => fetcher(url), { revalidateOnFocus: false })
   return {
     articles: data?.data ?? [],
