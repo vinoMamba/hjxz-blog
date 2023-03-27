@@ -21,3 +21,23 @@ model User {
   createdAt DateTime @default(now()) @db.Timestamptz // timestamp with time zone !!! important
   updatedAt DateTime @updatedAt @db.Timestamptz
 }
+
+// 用户的文章
+model Article {
+  id          Int      @id @default(autoincrement())
+  title       String
+  content     String
+  authorId    String
+  isPublished Boolean  @default(false)
+  categoryId  Int
+  createdAt   DateTime @default(now()) @db.Timestamptz // timestamp with time zone !!! important
+  updatedAt   DateTime @updatedAt @db.Timestamptz
+}
+
+// 文章分类
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now()) @db.Timestamptz // timestamp with time zone !!! important
+  updatedAt DateTime @updatedAt @db.Timestamptz
+}
