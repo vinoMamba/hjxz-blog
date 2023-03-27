@@ -12,6 +12,11 @@ interface User {
   title: string;
 }
 
+interface LoginInfo {
+  token: string;
+  userInfo: User;
+}
+
 interface BlogItem {
   id: string;
   title: string;

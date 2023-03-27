@@ -9,9 +9,10 @@ export function useLogin(code: string) {
     }
     return res.json()
   }
-  const { data, error } = useSwr<Result<User>>(code ? '/api/login' : null, fetcher, { revalidateOnFocus: false })
+  const { data, error } = useSwr<Result<LoginInfo>>(code ? '/api/login' : null, fetcher, { revalidateOnFocus: false })
   return {
-    data: data?.data,
+    userInfo: data?.data.userInfo,
+    token: data?.data.token,
     error,
   }
 }

@@ -35,17 +35,18 @@ export const Layout: FC<Props> = ({ children }) => {
       })
     }
   })
-  const { data, error } = useLogin(code)
+  const { userInfo, token, error } = useLogin(code)
   if (error) {
     return < div >error</div >
   }
-  if (!data) {
+  if (!userInfo) {
     return <LoadingPage />
   }
   return (
     <SWRConfig value={{
       fallbackData: {
-        userInfo: data
+        userInfo,
+        token
       }
     }}>
       {children}
