@@ -1,13 +1,14 @@
+import { Category } from "@prisma/client"
 import { Card } from "antd"
-import { useState } from "react"
-const Menu = () => {
-  const [current, setCurrent] = useState(1)
-  const categoryList = [
-    { id: 1, name: '前端' },
-    { id: 2, name: '后端' },
-    { id: 3, name: '数据库' },
-    { id: 4, name: '运维' },
-  ]
+import { FC, useState } from "react"
+
+type Props = {
+  categories: Category[]
+}
+
+const Menu: FC<Props> = (props) => {
+  const [current, setCurrent] = useState(-1)
+  const categoryList = [{ id: -1, name: '全部' }].concat(props.categories)
   function handleClick(id: number) {
     setCurrent(id)
   }
