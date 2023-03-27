@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { Result } from '../types'
 import prisma from '@/lib/prisma'
-import { Post } from '@prisma/client'
+import { Article } from '@prisma/client'
 
 /**
  *  GET /api/posts?categoryId=1
@@ -9,19 +8,19 @@ import { Post } from '@prisma/client'
  */
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Result<Post[] | null>>
+  res: NextApiResponse<Result<Article[] | null>>
 ) {
 
   req.headers['Content-Type'] = 'application/json'
   if (req.method !== 'GET') return res.status(405).json({ errcode: 405, data: null, message: 'method not allowed' })
   const { categoryId } = req.query
-  const allPosts = await prisma.post.findMany({
+  const allArticles = await prisma.article.findMany({
     where: {
       categoryId: Number(categoryId) || undefined,
-      published: true
+      isPublished: true
     }
   })
-  return allPosts
-    ? res.status(200).json({ errcode: 0, data: allPosts, message: 'ok' })
+  return allArticles
+    ? res.status(200).json({ errcode: 0, data: allArticles, message: 'ok' })
     : res.status(404).json({ errcode: 404, data: [], message: 'not found' })
 }

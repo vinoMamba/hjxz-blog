@@ -1,7 +1,10 @@
+import { ArticleList } from "@/components/ArticleList";
 import Menu from "@/components/Menu";
-import PostList from "@/components/PostList";
+import { useArticle } from "@/hooks/useArticle";
+import { Card } from "antd";
 
 export default function Home() {
+  const { articles } = useArticle({})
   return (
     <>
       <main
@@ -10,7 +13,13 @@ export default function Home() {
         }}
         className="h-screen m-auto items-start overflow-auto lg:flex ">
         <Menu />
-        <PostList className='flex-1' />
+        <div
+          className='h-screen overflow-auto ml-8 lg:pt-72 w-full'
+        >
+          <Card>
+            <ArticleList list={articles} />
+          </Card>
+        </div>
       </main>
     </>
   )
