@@ -1,6 +1,6 @@
 import { ArticleList } from "@/components/ArticleList";
 import Menu from "@/components/Menu";
-import { useArticle } from "@/hooks/useArticle";
+import { useArticles } from "@/hooks/useArticle";
 import { Card } from "antd";
 import { GetStaticProps } from "next";
 import prisma from "@/lib/prisma";
@@ -18,7 +18,7 @@ type Props = {
 }
 export default function Home(props: Props) {
   const [current, setCurrent] = useState(0)
-  const { articles } = useArticle({ categoryId: current })
+  const { articles } = useArticles({ categoryId: current })
   return (
     <ArticleContext.Provider value={{
       current,

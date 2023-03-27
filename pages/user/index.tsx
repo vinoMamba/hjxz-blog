@@ -2,12 +2,12 @@ import Head from 'next/head'
 import { Card, Avatar } from 'antd'
 import { useSWRConfig } from 'swr'
 import { ArticleList } from '@/components/ArticleList'
-import { useArticle } from '@/hooks/useArticle'
+import { useArticles } from '@/hooks/useArticle'
 
 const UserPage = () => {
   const config = useSWRConfig()
   const userInfo = config.fallbackData?.userInfo as User
-  const { articles } = useArticle({})
+  const { articles } = useArticles({})
   return (
     <>
       <Head>

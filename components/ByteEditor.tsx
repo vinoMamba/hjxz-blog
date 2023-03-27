@@ -1,6 +1,6 @@
 import 'bytemd/dist/index.min.css'
 import { Editor } from '@bytemd/react'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import gfm from '@bytemd/plugin-gfm'
 import highlight from '@bytemd/plugin-highlight'
 import breaks from '@bytemd/plugin-breaks'
@@ -20,16 +20,21 @@ const plugins = [
   zoom(),
   mermaid()
 ]
-export const ByteEditor = () => {
-  const [value, setValue] = useState('Hello, **World**!')
+
+type Props = {
+  value: string
+  setValue: (v: string) => void
+}
+
+export const ByteEditor: FC<Props> = (props) => {
   function handleChange(v: string) {
-    setValue(v)
+    props.setValue(v)
   }
   return (
     <div>
       <Editor
         plugins={plugins}
-        value={value} onChange={handleChange} />
+        value={props.value} onChange={handleChange} />
     </div>
   )
 }

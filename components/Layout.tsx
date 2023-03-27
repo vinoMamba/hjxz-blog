@@ -10,6 +10,12 @@ type Props = {
   children: React.ReactNode
 }
 
+interface FallbackData {
+  userInfo: User
+  token: string
+}
+
+
 export const Layout: FC<Props> = ({ children }) => {
   const router = useRouter()
   const [code, setCode] = useState<string>('')
@@ -47,7 +53,7 @@ export const Layout: FC<Props> = ({ children }) => {
       fallbackData: {
         userInfo,
         token
-      }
+      } as FallbackData
     }}>
       {children}
     </SWRConfig>
