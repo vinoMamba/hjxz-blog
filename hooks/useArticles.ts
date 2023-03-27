@@ -27,30 +27,3 @@ export function useArticles({ categoryId }: { categoryId?: number }) {
   }
 }
 
-export function useAddArticle(params: Partial<Article>) {
-  const { fallbackData } = useSWRConfig()
-  const token = fallbackData?.token
-  params.authorId = fallbackData?.userInfo.userId
-  const fetcher = async (url: string) => {
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify(params)
-    }
-    )
-    if (!res.ok) {
-      throw new Error('获取Token失败')
-    }
-    return res.json()
-  }
-  const { error } = useSwr<Result<null>>(
-    () => '/api/article',
-    (url: string) => fetcher(url), { revalidateOnFocus: false })
-  return {
-
-    error,
-  }
-}

@@ -8,7 +8,8 @@ export default async function handler(
   req.headers['Content-Type'] = 'application/json'
   switch (req.method) {
     case 'POST':
-      const { title, content, isPublished, authorId, categoryId } = req.body
+      const { title, content, isPublished, authorId, categoryId } = JSON.parse(req.body)
+      console.log(typeof req.body)
       try {
         await prisma.article.create({
           data: {

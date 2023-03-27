@@ -1,6 +1,6 @@
 import { ArticleList } from "@/components/ArticleList";
 import Menu from "@/components/Menu";
-import { useArticles } from "@/hooks/useArticle";
+import { useArticles } from "@/hooks/useArticles";
 import { Card } from "antd";
 import { GetStaticProps } from "next";
 import prisma from "@/lib/prisma";

@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { Card, Avatar } from 'antd'
 import { useSWRConfig } from 'swr'
 import { ArticleList } from '@/components/ArticleList'
-import { useArticles } from '@/hooks/useArticle'
+import { useArticles } from '@/hooks/useArticles'
 
 const UserPage = () => {
   const config = useSWRConfig()
