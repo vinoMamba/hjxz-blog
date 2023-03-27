@@ -1,7 +1,10 @@
-import { FC, useEffect, useState } from "react"
+import { FC, useState } from "react"
 import { useRouter } from "next/router"
 import { useEffectOnce } from "@/hooks/useEffectOnce"
 import { ready, runtime } from 'dingtalk-jsapi'
+import { useLogin } from "@/hooks/useLogin"
+import { LoadingPage } from "./LoadingPage"
+import { SWRConfig } from 'swr'
 
 type Props = {
   children: React.ReactNode
@@ -25,20 +28,27 @@ export const Layout: FC<Props> = ({ children }) => {
       ready(async function () {
         try {
           const { code } = await runtime.permission.requestAuthCode({ corpId })
-          const data = await fetch(`/api/login`, {
-            method: 'POST',
-            body: JSON.stringify({ code }),
-          })
+          setCode(code)
         } catch (error) {
           console.error(error)
         }
       })
     }
   })
-
+  const { data, error } = useLogin(code)
+  if (error) {
+    return < div >error</div >
+  }
+  if (!data) {
+    return <LoadingPage />
+  }
   return (
-    <>
+    <SWRConfig value={{
+      fallbackData: {
+        userInfo: data
+      }
+    }}>
       {children}
-    </>
+    </SWRConfig>
   )
 }
