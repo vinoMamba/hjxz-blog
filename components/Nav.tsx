@@ -1,18 +1,10 @@
 import Image from "next/image"
 import { useRouter } from "next/router"
-import { Avatar, Dropdown, MenuProps, Button } from 'antd'
+import { Button } from 'antd'
+import { UserIcon } from "./User"
 
 const Nav = () => {
   const router = useRouter()
-  const items: MenuProps["items"] = [
-    {
-      key: '0', label: (
-        <span className='flex items-center' onClick={() => router.push('/user')}>
-          个人中心
-        </span>
-      )
-    },
-  ]
   return (
     <nav
       style={{
@@ -43,9 +35,7 @@ const Nav = () => {
         </div>
         <div className="flex items-center">
           <Button className="mr-32" type="dashed" onClick={() => router.push('/article')}>写文章</Button>
-          <Dropdown menu={{ items }} placement="bottomRight" >
-            <Avatar />
-          </Dropdown>
+          <UserIcon />
         </div>
       </div>
     </nav >

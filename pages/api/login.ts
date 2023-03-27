@@ -1,17 +1,19 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getUserByCode } from '@/shared/dingtalk'
 import prisma from '@/lib/prisma'
+import { sign } from '@/shared/jwt'
 
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Result<User | null>>
+  res: NextApiResponse<Result<LoginInfo | null>>
 ) {
   req.headers['Content-Type'] = 'application/json'
   if (req.method === 'POST') {
     const { code } = JSON.parse(req.body)
     const userInfo = await getUserByCode(code)
     if (userInfo) {
+      const token = await sign({ userId: userInfo.userId })
       const u = await prisma.user.findFirst({
         where: {
           userId: userInfo.userId
@@ -31,7 +33,10 @@ export default async function handler(
       res.status(200).json({
         errcode: 0,
         message: '登录成功',
-        data: userInfo
+        data: {
+          token,
+          userInfo
+        }
       })
     } else {
       res.status(401).json({

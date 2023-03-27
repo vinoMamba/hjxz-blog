@@ -1,9 +1,9 @@
-import { Result } from '@/pages/types'
-import { Post } from '@prisma/client'
-import useSwr from 'swr'
+import { Article } from '@prisma/client'
+import useSwr, { useSWRConfig } from 'swr'
 
-export function usePosts({ categoryId }: { categoryId?: number }) {
-  const token = localStorage.getItem('token')
+export function useArticles({ categoryId }: { categoryId?: number }) {
+  const config = useSWRConfig()
+  const token = config.fallbackData?.token
   const fetcher = async (url: string) => {
     const res = await fetch(url, {
       method: 'GET',
@@ -18,16 +18,12 @@ export function usePosts({ categoryId }: { categoryId?: number }) {
     }
     return res.json()
   }
-  const {
-    data,
-    error,
-    mutate
-  } = useSwr<Result<Post[]>>(
-    () => categoryId ? `/api/posts?categoryId=${categoryId}` : '/api/posts',
+  const { data, error } = useSwr<Result<Article[]>>(
+    () => categoryId !== 0 ? `/api/articles?categoryId=${categoryId}` : '/api/articles',
     (url: string) => fetcher(url), { revalidateOnFocus: false })
   return {
-    posts: data?.data,
+    articles: data?.data ?? [],
     error,
-    updatePosts: mutate
   }
 }
+
