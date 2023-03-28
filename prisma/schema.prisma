@@ -27,6 +27,7 @@ model Article {
   id          Int      @id @default(autoincrement())
   title       String
   content     String
+  description String
   authorId    String
   isPublished Boolean  @default(false)
   categoryId  Int

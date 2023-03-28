@@ -28,7 +28,7 @@ export const ArticleList: FC<PostProps> = (props) => {
             <div>
               <span className="text-16 font-500">{item.title}</span>
               <p
-                className="text-#8a919f text-14 mt-8">{item.content}</p>
+                className="text-#8a919f text-14 mt-8">{item.description}</p>
             </div>
           </li>
         )

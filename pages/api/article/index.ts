@@ -8,13 +8,13 @@ export default async function handler(
   req.headers['Content-Type'] = 'application/json'
   switch (req.method) {
     case 'POST':
-      const { title, content, isPublished, authorId, categoryId } = JSON.parse(req.body)
-      console.log(typeof req.body)
+      const { title, content, isPublished, authorId, categoryId, description } = JSON.parse(req.body)
       try {
         await prisma.article.create({
           data: {
             title,
             content,
+            description,
             isPublished,
             authorId,
             categoryId,
@@ -27,6 +27,7 @@ export default async function handler(
       }
       break
     case 'PUT':
+
       break
     case 'DELETE':
       break

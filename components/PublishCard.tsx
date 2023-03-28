@@ -1,7 +1,9 @@
 import { Article, Category } from "@prisma/client"
 import { FC, useState } from "react"
-import { Radio, Card, Button, Form, message } from "antd"
+import { Radio, Card, Button, Form, message, Input } from "antd"
 import { useRouter } from "next/router"
+
+const { TextArea } = Input;
 
 type Props = {
   setOpen: (v: boolean) => void
@@ -12,6 +14,7 @@ export const PublishCard: FC<Props> = (props) => {
   const router = useRouter()
   const [messageApi, contextHolder] = message.useMessage();
   const [category, setCategory] = useState();
+  const [description, setDescription] = useState('');
   function onChange(e: any) {
     setCategory(e.target.value)
   }
@@ -19,6 +22,7 @@ export const PublishCard: FC<Props> = (props) => {
     try {
       const publishParams = {
         ...props.params,
+        description,
         categoryId: category,
         isPublished: true
       }
@@ -52,6 +56,9 @@ export const PublishCard: FC<Props> = (props) => {
                 )
               })}
             </Radio.Group>
+          </Form.Item>
+          <Form.Item>
+            <TextArea rows={4} placeholder="请输入文章的简要描述" maxLength={6} value={description} onChange={(e) => setDescription(e.target.value)} />
           </Form.Item>
           <Form.Item className="flex justify-end gap-4">
             <Button>取消</Button>
