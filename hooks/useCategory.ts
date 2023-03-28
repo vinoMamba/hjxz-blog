@@ -1,4 +1,4 @@
-import { Result } from '@/pages/types'
+import { Result } from '@/types'
 import { Category } from '@prisma/client'
 import useSwr from 'swr'
 

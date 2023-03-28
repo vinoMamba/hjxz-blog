@@ -1,7 +1,7 @@
-import { Article } from '@prisma/client'
+import { ArticleItem, Result } from '@/types'
 import useSwr, { useSWRConfig } from 'swr'
 
-export function useArticles({ categoryId }: { categoryId?: number }) {
+export function useArticles({ categoryId, authorId, isPublished }: { categoryId?: number, authorId?: string, isPublished?: boolean }) {
   const config = useSWRConfig()
   const token = config.fallbackData?.token
   const fetcher = async (url: string) => {
@@ -18,8 +18,20 @@ export function useArticles({ categoryId }: { categoryId?: number }) {
     }
     return res.json()
   }
-  const { data, error } = useSwr<Result<Article[]>>(
-    () => categoryId !== 0 ? `/api/articles?categoryId=${categoryId}` : '/api/articles',
+  const { data, error } = useSwr<Result<ArticleItem[]>>(
+    () => {
+      const params = new URLSearchParams()
+      if (categoryId) {
+        params.append('categoryId', categoryId.toString())
+      }
+      if (authorId) {
+        params.append('authorId', authorId)
+      }
+      if (isPublished) {
+        params.append('isPublished', isPublished.toString())
+      }
+      return `/api/articles?${params.toString()}`
+    },
     (url: string) => fetcher(url), { revalidateOnFocus: false })
   return {
     articles: data?.data ?? [],

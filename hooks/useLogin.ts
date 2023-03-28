@@ -1,3 +1,4 @@
+import { LoginInfo, Result } from '@/types'
 import useSwr from 'swr'
 
 
