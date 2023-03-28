@@ -3,11 +3,13 @@ import { Card, Avatar } from 'antd'
 import { useSWRConfig } from 'swr'
 import { ArticleList } from '@/components/ArticleList'
 import { useArticles } from '@/hooks/useArticles'
+import { User } from '@/types'
 
 const UserPage = () => {
   const config = useSWRConfig()
   const userInfo = config.fallbackData?.userInfo as User
-  const { articles } = useArticles({})
+  const authorId = userInfo!.userId
+  const { articles } = useArticles({ authorId })
   return (
     <>
       <Head>

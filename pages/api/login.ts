@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { getUserByCode } from '@/shared/dingtalk'
 import prisma from '@/lib/prisma'
 import { sign } from '@/shared/jwt'
+import { LoginInfo, Result } from '@/types'
 
 
 export default async function handler(

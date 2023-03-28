@@ -1,3 +1,4 @@
+import { User } from "@prisma/client"
 import { Avatar, Dropdown, MenuProps } from "antd"
 import { useRouter } from "next/router"
 import { useSWRConfig } from "swr"

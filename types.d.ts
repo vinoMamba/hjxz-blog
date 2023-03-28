@@ -1,3 +1,6 @@
+import { Article } from "@prisma/client";
+
+
 interface Result<T> {
   errcode: number;
   message: string;
@@ -10,6 +13,10 @@ interface User {
   name: string;
   email: string;
   title: string;
+}
+
+interface ArticleItem extends Article {
+  authorName: string
 }
 
 interface LoginInfo {

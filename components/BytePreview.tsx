@@ -1,5 +1,4 @@
-import 'bytemd/dist/index.min.css'
-import { Editor } from '@bytemd/react'
+import { Viewer } from '@bytemd/react'
 import { FC } from 'react'
 import gfm from '@bytemd/plugin-gfm'
 import highlight from '@bytemd/plugin-highlight'
@@ -20,21 +19,15 @@ const plugins = [
   zoom(),
   mermaid()
 ]
-
 type Props = {
-  value: string
-  setValue: (v: string) => void
+  content: string
 }
-
-export const ByteEditor: FC<Props> = (props) => {
-  function handleChange(v: string) {
-    props.setValue(v)
-  }
+export const BytePreview: FC<Props> = (props) => {
   return (
     <div>
-      <Editor
+      <Viewer
         plugins={plugins}
-        value={props.value} onChange={handleChange} />
+        value={props.content} />
     </div>
   )
 }
