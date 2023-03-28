@@ -2,6 +2,7 @@ import { Result, Button } from "antd"
 import { FC } from "react"
 import { useRouter } from "next/router"
 import { ArticleItem } from "@/types"
+import Link from "next/link"
 
 
 interface PostProps {
@@ -27,9 +28,11 @@ export const ArticleList: FC<PostProps> = (props) => {
               <span className="text-#8a919f text-13">2023</span>
             </div>
             <div>
-              <span className="text-16 font-500">{item.title}</span>
-              <p
-                className="text-#8a919f text-14 mt-8">{item.description}</p>
+              <Link href={`/article/${item.id}`}>
+                <span className="text-16 font-500">{item.title}</span>
+                <p
+                  className="text-#8a919f text-14 mt-8">{item.description}</p>
+              </Link>
             </div>
           </li>
         )

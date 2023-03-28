@@ -72,7 +72,7 @@ export const PublishCard: FC<Props> = (props) => {
             <TextArea
               rows={4}
               placeholder="编写文章摘要"
-              maxLength={4}
+              maxLength={200}
               value={description} onChange={(e) => setDescription(e.target.value)} />
           </Form.Item>
           <Form.Item className="flex justify-end gap-8">
