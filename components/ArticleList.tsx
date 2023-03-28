@@ -1,10 +1,11 @@
-import { Article } from "@prisma/client"
 import { Result, Button } from "antd"
 import { FC } from "react"
 import { useRouter } from "next/router"
+import { ArticleItem } from "@/types"
+
 
 interface PostProps {
-  list: Article[]
+  list: ArticleItem[]
 }
 export const ArticleList: FC<PostProps> = (props) => {
   const router = useRouter()
@@ -22,7 +23,7 @@ export const ArticleList: FC<PostProps> = (props) => {
             key={item.id}
             className='cursor-pointer mb-8 p-8 border-b border-b-solid rounded-8  border-#f2f3f5 hover:bg-#f2f3f5' >
             <div className="flex items-center mb-8 gap-8">
-              <span className="text-#515767 text-14">{item.authorId}</span>
+              <span className="text-#515767 text-14">{item.authorName}</span>
               <span className="text-#8a919f text-13">2023</span>
             </div>
             <div>

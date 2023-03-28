@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '@/lib/prisma'
-import { Article } from '@prisma/client'
+import { ArticleItem, Result } from '@/types'
 
 /**
  *  GET /api/posts?categoryId=1
@@ -8,7 +8,7 @@ import { Article } from '@prisma/client'
  */
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Result<Article[] | null>>
+  res: NextApiResponse<Result<ArticleItem[] | null>>
 ) {
 
   req.headers['Content-Type'] = 'application/json'
@@ -18,9 +18,17 @@ export default async function handler(
     where: {
       categoryId: Number(categoryId) || undefined,
       isPublished: true
+    },
+  })
+  const articleAndAuthor = allArticles.map(async article => {
+    const user = await prisma.user.findUnique({ where: { userId: article.authorId } })
+    return {
+      ...article,
+      authorName: user!.name
     }
   })
-  return allArticles
-    ? res.status(200).json({ errcode: 0, data: allArticles, message: 'ok' })
+  const list = await Promise.all(articleAndAuthor)
+  return list
+    ? res.status(200).json({ errcode: 0, data: list, message: 'ok' })
     : res.status(404).json({ errcode: 404, data: [], message: 'not found' })
 }
